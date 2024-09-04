@@ -9,7 +9,7 @@ data = yaml.safe_load(
                         "data.yml")))
 
 @app.route("/")
-def home ():
+def home():
     return render_template (
         "home.html",
         title="Hello World!",
