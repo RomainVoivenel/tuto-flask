@@ -16,4 +16,9 @@ def detail(id):
     return render_template (
         "detail.html",
         title="My Book",
+        titleB=book["title"],
+        imgB=book["img"],
+        authorB=book["author"],
+        urlB=book["url"],
+        priceB=book["price"],
         book=book)
