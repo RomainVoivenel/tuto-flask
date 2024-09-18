@@ -9,7 +9,7 @@ def mkpath(p):
     return os.path.normpath(os.path.join(os.path.dirname(__file__), p))
 
 from flask_sqlalchemy import SQLAlchemy
-app.config['QLALCHEMY_DATABASE_UR'] = (
+app.config['SQLALCHEMY_DATABASE_URI'] = (
     'sqlite:///'+mkpath('../myapp.db')
 )
 db = SQLAlchemy(app)
