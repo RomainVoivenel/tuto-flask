@@ -2,11 +2,11 @@
 {% block content %}
 <h1>Edit author : {{ author.name }}</h1>
 <form role="form" method="POST" action ="{{ url_for('save_author') }}">
-    {{ form. hidden_tag() }}
+    {{ form.hidden_tag() }}
     <div class={% if form.name.errors %}
-                "form -group has -error"
+                "form-group has-error"
                 {% else %}
-                "form -group"
+                "form-group"
                 {% endif %}>
         {{ form.name.label }} {{ form.name(size=50,class_="form-control") }}
     </div>
@@ -18,5 +18,5 @@
     </ul>
     {% endif%}
     <input class="btn btn-default " type="submit" value="Enregistrer">
-</form >
+</form>
 {% endblock %}

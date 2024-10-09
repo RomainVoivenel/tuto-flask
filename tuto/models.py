@@ -1,4 +1,5 @@
 from .app import db
+from flask_login import UserMixin
 
 class Author (db.Model):
     id = db.Column(db.Integer, primary_key =True)
@@ -18,6 +19,13 @@ class Book(db.Model):
     
     def __repr__(self):
         return f"<Book {self.id, self.title}>"
+    
+class User(db.Model, UserMixin):
+    username = db.Column(db.String(50), primary_key=True)
+    password = db.Column(db.String(255))
+    
+    def get_is(self):
+        return self.username
     
 def get_sample():
     return Book.query.limit(18).all()

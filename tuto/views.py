@@ -41,7 +41,7 @@ def save_author():
         a = get_author(id)
         a.name = f.name.data
         db. session.commit()
-        return redirect(url_for('one_author', id=a.id))
+        return redirect(url_for('edit_author', id=a.id))
     a = get_author(int(f.id.data))
     return render_template (
         "edit - author.html",
