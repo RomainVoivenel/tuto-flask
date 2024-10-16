@@ -1,5 +1,5 @@
 from .app import app, db
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, request
 from .models import *
 from flask_wtf import FlaskForm
 from wtforms import StringField , HiddenField
@@ -46,3 +46,14 @@ def save_author():
     return render_template (
         "edit - author.html",
         author =a, form=f)
+
+@app.route('/search', methods=['GET'])
+def search():
+    author_query = request.form.args.get('query')  # Récupère le paramètre d'auteur
+    books = []
+
+    print(author_query)
+    if author_query:
+        books = search_books_by_author(author_query)  # Recherche les livres par auteur
+    return render_template('search.html', title='Résultats de recherche', books=books)
+
