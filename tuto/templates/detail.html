@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block style %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}">
 {% endblock %}
 {% block content %}
 <div class="card border-light mb-3 mycard">
@@ -12,7 +12,7 @@
         </a>
         <div class="card-body">
                 <h5 class="card-text card-footer">
-                        Auteur : {{ book.author }}
+                        Auteur : {{ book.author.name }}
                 </h5>
                 <h6 class="card-text card-footer">
                         Prix : {{ book.price }} €
