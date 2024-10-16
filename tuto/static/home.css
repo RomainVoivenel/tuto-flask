@@ -19,7 +19,11 @@ footer {
 }
 
 main > .container {
-    padding: 60px, 15px, 0;
+    padding: 60px 15px 0;
+}
+
+a.username{
+    color: white
 }
 
 div.mycard{
