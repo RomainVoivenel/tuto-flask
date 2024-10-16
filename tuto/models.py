@@ -35,3 +35,8 @@ def get_book(id):
 
 def get_author(id):
     return Author.query.get_or_404(id)
+
+def search_books_by_author(author_name):
+    print(author_name)
+    return Book.query.join(Author).filter(Author.name.like(f'%{author_name}%')).limit(18).all()
+
