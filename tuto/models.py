@@ -36,7 +36,12 @@ def get_book(id):
 def get_author(id):
     return Author.query.get_or_404(id)
 
-def search_books_by_author(author_name):
-    print(author_name)
-    return Book.query.join(Author).filter(Author.name.like(f'%{author_name}%')).limit(18).all()
+from sqlalchemy import or_
+
+def search_books_by_author_or_title(search_val):
+    return Book.query.join(Author).filter(or_( #Permet d'imposer de recherche un 'or'
+            Author.name.like(f'%{search_val}%'),  # Rechercher parmi les auteurs si le search_val y est
+            Book.title.like(f'%{search_val}%')    # Rechercher parmi les titres de livre si le search_val y est
+            )).limit(18).all()
+
 

@@ -47,13 +47,15 @@ def save_author():
         "edit - author.html",
         author =a, form=f)
 
-@app.route('/search', methods=['GET'])
+@app.route('/search')
 def search():
-    author_query = request.form.args.get('query')  # Récupère le paramètre d'auteur
+    # Récupère la valeur de l'input "input_value" depuis le formulaire
+    search_val = request.args.get('input_value')  
     books = []
-
-    print(author_query)
-    if author_query:
-        books = search_books_by_author(author_query)  # Recherche les livres par auteur
+    
+    if search_val is not None:
+        books = search_books_by_author_or_title(search_val)
+    
     return render_template('search.html', title='Résultats de recherche', books=books)
+
 
