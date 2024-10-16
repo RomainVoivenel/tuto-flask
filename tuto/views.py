@@ -28,7 +28,6 @@ class LoginForm(FlaskForm):
 
 @app.route("/")
 def home():
-    print(get_sample())
     return render_template (
         "home.html",
         title="My Books",
@@ -63,6 +62,13 @@ def save_author():
     return render_template (
         "edit - author.html",
         author =a, form=f)
+
+@app.route("/auteur")
+def auteur():
+    return render_template (
+        "auteur.html",
+        title="The author",
+        authors = get_sample_authors())
 
 
 @app.route('/search')

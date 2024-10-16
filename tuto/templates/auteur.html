@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block styles %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}">
+<h1>{{title}}</h1>
+<div class="sample">
+    <ul id="liste-auteur">
+        {% for x in authors %}
+        <li><a href="{{url_for('auteur', id=x.id)}}">{{x.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

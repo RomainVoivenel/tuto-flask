@@ -30,3 +30,12 @@ div.mycard{
     margin: auto;
     width: 18rem;
 }
+
+#liste-auteur {
+    list-style: none;
+}
+
+#liste-auteur li{
+    border: solid;
+    border-color: grey;
+}
