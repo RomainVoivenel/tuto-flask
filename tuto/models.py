@@ -47,7 +47,7 @@ def search_books_by_author_or_title(search_val):
             )).limit(18).all()
 
 def search_books_by_author():
-    return Book.query.limit(18).all()
+    return Author.query.limit(100).all()
 
 @login_manager.user_loader
 def load_user(username):

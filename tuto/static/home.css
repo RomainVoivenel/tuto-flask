@@ -44,6 +44,13 @@ div.mycard{
     border-color: grey;
 }
 
-.deroulant{
-    margin: auto;
+.custom-select {
+    position: relative;
+    z-index: 1;
+    transition: z-index 0.3s ease;
+}
+
+.custom-select:focus {
+    position: absolute;
+    z-index: 1000;
 }
