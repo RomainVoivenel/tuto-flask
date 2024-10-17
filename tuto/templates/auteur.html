@@ -8,7 +8,7 @@
 <div class="sample">
     <ul id="liste-auteur">
         {% for x in authors %}
-        <li><a href="{{url_for('auteur', id=x.id)}}">{{x.name}}</a></li>
+        <li><a href="{{url_for('edit_author', id=x.id)}}">{{x.name}}</a></li>
         {% endfor %}
     </ul>
 </div>

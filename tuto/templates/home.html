@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}">
 <h1>{{title}}</h1>
 <select class="custom-select" onfocus='this.size=7;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+    <option>Choose an author</option>
     {% for author in authors %}
         <option><a href="{{url_for('home', id=author.id)}}">{{ author.name }}</a></option>
     {% endfor %}
@@ -16,5 +17,7 @@
     <img src="{{ url_for('static', filename='images/'+x.img) }}" alt="{{x.title}}" title="{{x.title}}">
     </a>
     {% endfor %}
+    {% if current_user.is_authenticated%}
+    <a href="{{ url_for ('add_book') }}" class="btn btn-success rounded-pill">Add book</a>
 </div>
 {% endblock %}

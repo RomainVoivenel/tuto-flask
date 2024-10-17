@@ -17,6 +17,9 @@ class BookForm(FlaskForm):
     id = HiddenField('id')
     title = StringField('Title', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired()])
+    img = StringField('Image', validators=[DataRequired()])
+    url = StringField('Url', validators=[DataRequired()])
+    author = StringField('Author', validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
     username = StringField('Username')
@@ -73,6 +76,20 @@ def save_author():
 def edit_book(id):
     b:Book = get_book(id)
     f = BookForm(id=b.id, title=b.title, price=b.price)
+    return render_template(
+        "edit-book.html",
+        book=b, form=f)
+    
+@app.route("/add/book/")
+def add_book(id):
+    b = Book(
+    price=19.99,
+    title="Le titre du livre",
+    url="http://example.com",
+    img="http://example.com/image.jpg",
+    author_id=1
+    )
+    f = BookForm(id=b.id, title=b.title, price=b.price, img=b.img, url=b.url, author=b.author)
     return render_template(
         "edit-book.html",
         book=b, form=f)
