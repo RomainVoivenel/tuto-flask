@@ -26,6 +26,10 @@ a.username{
     color: white
 }
 
+h2.error{
+    color: red;
+}
+
 div.mycard{
     margin: auto;
     width: 18rem;

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Edit author : {{ author.name }}</h1>
+{% if current_user.is_authenticated%}
 <form role="form" method="POST" action ="{{ url_for('save_author') }}">
     {{ form.hidden_tag() }}
     <div class={% if form.name.errors %}
@@ -19,4 +20,7 @@
     {% endif%}
     <input class="btn btn-default " type="submit" value="Enregistrer">
 </form>
+{% else %}
+<h2 class="error">You are not authentified</p>
+{% endif %}
 {% endblock %}
