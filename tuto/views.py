@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 from flask_login import login_user, current_user, logout_user
 from flask import request
 from wtforms import StringField , HiddenField
-from wtforms . validators import DataRequired
+from wtforms.validators import DataRequired
 from wtforms import PasswordField
 from hashlib import sha256
 
@@ -16,6 +16,7 @@ class AuthorForm(FlaskForm):
 class BookForm(FlaskForm):
     id = HiddenField('id')
     title = StringField('Title', validators=[DataRequired()])
+    price = StringField('Price', validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
     username = StringField('Username')
@@ -47,7 +48,7 @@ def detail(id):
     
 @app.route("/edit/author/<int:id>")
 def edit_author(id):
-    a = get_author(id)
+    a:Author = get_author(id)
     f = AuthorForm(id=a.id, name=a.name)
     return render_template(
         "edit-author.html",
@@ -70,26 +71,27 @@ def save_author():
     
 @app.route("/edit/book/<int:id>")
 def edit_book(id):
-    b = get_book(id)
-    f = BookForm(id=b.id, title=b.title)
+    b:Book = get_book(id)
+    f = BookForm(id=b.id, title=b.title, price=b.price)
     return render_template(
         "edit-book.html",
-        author=b, form=f)
+        book=b, form=f)
 
 @app.route("/save/book/", methods=("POST",))
 def save_book():
-    a = None
-    f = BookForm()
+    b = None
+    f:BookForm = BookForm()
     if f.validate_on_submit():
         id = int(f.id.data)
-        a = get_book(id)
-        a.name = f.name.data
-        db. session.commit()
-        return redirect(url_for('edit_book', id=a.id))
-    a = get_author(int(f.id.data))
+        b:Book = get_book(id)
+        b.title = f.title.data
+        b.price = f.price.data
+        db.session.commit()
+        return redirect(url_for('edit_book', id=b.id))
+    b = get_book(int(f.id.data))
     return render_template (
         "edit-book.html",
-        author =a, form=f)
+        book =b, form=f)
 
 @app.route("/auteur")
 def auteur():

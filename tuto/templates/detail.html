@@ -18,5 +18,8 @@
                         Prix : {{ book.price }} €
                 </h6>
         </div>
+        {% if current_user.is_authenticated%}
+        <a href="{{ url_for ('edit_book', id=book.id) }}" class="btn btn-success rounded-pill">Modifier</a>
+        {% endif%}
 </div>
 {% endblock %}
