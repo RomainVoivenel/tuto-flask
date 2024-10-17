@@ -13,6 +13,10 @@ class AuthorForm(FlaskForm):
     id = HiddenField('id')
     name = StringField('Nom', validators=[DataRequired()])
     
+class BookForm(FlaskForm):
+    id = HiddenField('id')
+    title = StringField('Title', validators=[DataRequired()])
+
 class LoginForm(FlaskForm):
     username = StringField('Username')
     password = PasswordField('Password')
@@ -61,7 +65,30 @@ def save_author():
         return redirect(url_for('edit_author', id=a.id))
     a = get_author(int(f.id.data))
     return render_template (
-        "edit - author.html",
+        "edit-author.html",
+        author =a, form=f)
+    
+@app.route("/edit/book/<int:id>")
+def edit_book(id):
+    b = get_book(id)
+    f = BookForm(id=b.id, title=b.title)
+    return render_template(
+        "edit-book.html",
+        author=b, form=f)
+
+@app.route("/save/book/", methods=("POST",))
+def save_book():
+    a = None
+    f = BookForm()
+    if f.validate_on_submit():
+        id = int(f.id.data)
+        a = get_book(id)
+        a.name = f.name.data
+        db. session.commit()
+        return redirect(url_for('edit_book', id=a.id))
+    a = get_author(int(f.id.data))
+    return render_template (
+        "edit-book.html",
         author =a, form=f)
 
 @app.route("/auteur")
