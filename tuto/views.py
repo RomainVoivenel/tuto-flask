@@ -31,7 +31,8 @@ def home():
     return render_template (
         "home.html",
         title="My Books",
-        books =get_sample())
+        books =get_sample(),
+        authors=search_books_by_author())
 
 @app.route("/detail/<id>")
 def detail(id):

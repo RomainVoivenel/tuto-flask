@@ -43,3 +43,7 @@ div.mycard{
     border: solid;
     border-color: grey;
 }
+
+.deroulant{
+    margin: auto;
+}
