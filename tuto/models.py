@@ -28,7 +28,7 @@ class User(db.Model, UserMixin):
         return self.username
     
 def get_sample():
-    return Book.query.limit(30).all()
+    return Book.query.join(Author).order_by(Author.name).all()
 
 def get_book_by_author(author_id):
     return Book.query.filter_by(author_id=author_id).all()
@@ -50,11 +50,11 @@ def search_books_by_author_or_title(search_val):
             )).limit(30).all()
 
 def search_books_by_author():
-    return Author.query.order_by(Author.name).limit(100).all()
+    return Author.query.order_by(Author.name).all()
 
 @login_manager.user_loader
 def load_user(username):
     return User.query.get_or_404(username)
 
 def get_sample_authors():
-    return Author.query.limit(30).all()
+    return Author.query.all()
