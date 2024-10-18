@@ -47,7 +47,7 @@ def search_books_by_author_or_title(search_val):
             Author.name.like(f'%{search_val}%'),  # Rechercher parmi les auteurs si le search_val y est
             Book.title.like(f'%{search_val}%'),    # Rechercher parmi les titres de livre si le search_val y est
             Book.price.like(f'%{search_val}%')
-            )).limit(30).all()
+            )).order_by(Author.name).all()
 
 def search_books_by_author():
     return Author.query.order_by(Author.name).all()
