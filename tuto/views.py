@@ -38,7 +38,7 @@ class LoginForm(FlaskForm):
 def home():
     author_id = request.args.get('input_value')
 
-    if author_id == 'All author':
+    if author_id is None or author_id == 'All author':
         books = get_sample()
     else:
         books = get_book_by_author(author_id)
