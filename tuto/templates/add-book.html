@@ -1,27 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Add book</h1>
-{% if current_user.is_authenticated%}
-<form role="form" method="POST" action ="{{ url_for('save_book') }}">
+{% if current_user.is_authenticated %}
+<form role="form" method="POST" action="{{ url_for('add_book_save') }}" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
+    <input type="file" id="img" name="book_img" accept="image/png, image/jpeg" />
     <div class={% if form.title.errors %}
                 "form-group has-error"
                 {% else %}
                 "form-group"
                 {% endif %}>
-        {{ form.title.label }} {{ form.title(size=50,class_="form-control") }}
-        {{ form.price.label }} {{ form.price(size=50,class_="form-control") }}
+        {{ form.title.label }} {{ form.title(size=50, class_="form-control") }}
+        {{ form.price.label }} {{ form.price(size=50, class_="form-control") }}
+        {{ form.url.label }} {{ form.url(size=50, class_="form-control") }}
+        {{ form.author.label }}
+        <select name="input_value" class="selectpicker form-select" onfocus='this.size=7;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+        {% for author in authors %}
+            <option value="{{ author.id }}" 
+                {% if request.args.get('input_value') == author.id|string %}selected{% endif %}>
+                {{ author.name }}
+            </option>
+        {% endfor %}
+        </select>
     </div>
-    {% if form.title.errors%}
+    {% if form.title.errors %}
     <ul class="list-group">
-        {% for e in form.title.errors%}
-        <li class="list-group-item list-group-item-danger">{{e}}</li>
-        {% endfor%}
+        {% for e in form.title.errors %}
+        <li class="list-group-item list-group-item-danger">{{ e }}</li>
+        {% endfor %}
     </ul>
-    {% endif%}
-    <input class="btn btn-default " type="submit" value="Enregistrer">
+    {% endif %}
+    <input class="btn btn-success rounded-pill" type="submit" value="Add">
 </form>
 {% else %}
-<h2 class="error">You are not authentified</p>
+<h2 class="error">You are not authenticated</h2>
 {% endif %}
 {% endblock %}

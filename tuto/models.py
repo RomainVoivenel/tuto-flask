@@ -36,8 +36,18 @@ def get_book_by_author(author_id):
 def get_book(id):
     return Book.query.get_or_404(id)
 
-def get_author(id):
+def get_last_book_id():
+    last_book:Book = Book.query.order_by(Book.id.desc()).first()
+    if last_book:
+        return last_book.id
+
+def get_author(id): 
     return Author.query.get_or_404(id)
+
+def get_last_book_id():
+    last_author:Author = Author.query.order_by(Author.id.desc()).first()
+    if last_author:
+        return last_author.id
 
 
 from sqlalchemy import or_

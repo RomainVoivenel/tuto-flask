@@ -83,24 +83,30 @@ def save_author():
 @app.route("/edit/book/<int:id>")
 def edit_book(id):
     b:Book = get_book(id)
-    f = BookForm(id=b.id, title=b.title, price=b.price)
+    f = BookForm(id=b.id, title=b.title, price=b.price, img=b.img, url=b.url, author=b.author)
     return render_template(
         "edit-book.html",
         book=b, form=f)
     
 @app.route("/add/book/")
-def add_book(id):
-    b = Book(
-    price=19.99,
-    title="Le titre du livre",
-    url="http://example.com",
-    img="http://example.com/image.jpg",
-    author_id=1
-    )
-    f = BookForm(id=b.id, title=b.title, price=b.price, img=b.img, url=b.url, author=b.author)
+def add_book():
+    f = BookForm()
     return render_template(
-        "edit-book.html",
-        book=b, form=f)
+        "add-book.html",
+        form=f, authors=search_books_by_author()
+    )
+
+@app.route("/add/book/save/", methods=("POST",))
+def add_book_save():
+    b=None
+    f:BookForm = BookForm()
+    if f.validate_on_submit():
+        id = get_last_book_id() + 1
+        b:Book = Book(id=id, title=f.title.data, price=f.price.data, img=f.img.data, url=f.url.data, author=f.author.data)
+        db.session.add(b)
+        db.session.commit()
+        return redirect(url_for('edit_book', id=b.id))
+    return render_template("edit-book.html", book=b, form=f)
 
 @app.route("/save/book/", methods=("POST",))
 def save_book():
@@ -111,6 +117,9 @@ def save_book():
         b:Book = get_book(id)
         b.title = f.title.data
         b.price = f.price.data
+        b.img = f.img.data
+        b.url = f.url.data
+        db.session.add(b)
         db.session.commit()
         return redirect(url_for('edit_book', id=b.id))
     b = get_book(int(f.id.data))

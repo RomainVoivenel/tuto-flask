@@ -11,6 +11,8 @@
                 {% endif %}>
         {{ form.title.label }} {{ form.title(size=50,class_="form-control") }}
         {{ form.price.label }} {{ form.price(size=50,class_="form-control") }}
+        {{ form.url.label }} {{ form.url(size=50,class_="form-control") }}
+        {{ form.author.label }} {{ form.author(size=50,class_="form-control") }}
     </div>
     {% if form.title.errors%}
     <ul class="list-group">
