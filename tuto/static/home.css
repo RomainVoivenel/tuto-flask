@@ -1,3 +1,18 @@
+
+.select-option {
+    position: relative;
+    z-index: 10;
+}
+
+.custom-select {
+    position: absolute;
+    z-index: 11; 
+    top: 0;
+    left: 0;
+}
+
+
+
 h1 {
     color: red;
 }
@@ -48,21 +63,4 @@ img{
     margin: 1%;
 }
 
-.select-option {
-    position: relative; /* Pour positionner le sélecteur par rapport à ce conteneur */
-    z-index: 10; /* Assure que le sélecteur est au-dessus des éléments sous-jacents */
-}
 
-.custom-select {
-    position: absolute; /* Positionnement absolu pour le sélecteur */
-    z-index: 11; /* Z-index supérieur pour s'assurer qu'il soit au-dessus */
-    /* Ajoutez les marges ou padding si nécessaire */
-    top: 0; /* Ajustez cette valeur pour le positionnement vertical souhaité */
-    left: 0; /* Ajustez cette valeur pour le positionnement horizontal souhaité */
-}
-
-/* Réglages pour le conteneur .sample */
-.sample {
-    position: relative; /* S'assure que le contexte d'empilement soit propre */
-    z-index: 1; /* Un z-index inférieur pour que le contenu derrière soit en dessous */
-}
