@@ -5,11 +5,21 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}">
 <h1>{{title}}</h1>
+{% if current_user.is_authenticated%}
 <div class="sample">
     <ul id="liste-auteur">
         {% for x in authors %}
-        <li><a href="{{url_for('edit_author', id=x.id)}}">{{x.name}}</a></li>
+        <a class="rectangle-acteur" href="{{url_for('edit_author', id=x.id)}}"><li>{{x.name}}</li></a>
         {% endfor %}
     </ul>
 </div>
+{%else%}
+<div class="sample">
+    <ul id="liste-auteur">
+        {% for x in authors %}
+    <li class="rectangle-acteur">{{x.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{%endif%}
 {% endblock %}
