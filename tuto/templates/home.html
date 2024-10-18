@@ -7,7 +7,7 @@
 <h1>{{title}}</h1>
 <form action="{{ url_for('home') }}" method="GET">
     <select name="input_value" class="custom-select" onfocus='this.size=7;' onblur='this.size=1;' onchange='this.form.submit(); this.size=1; this.blur();'>
-        <option>All author</option>
+        <option>All book</option>
         {% for author in authors %}
             <option value="{{ author.id }}" 
                 {% if request.args.get('input_value') == author.id|string %}selected{% endif %}>
