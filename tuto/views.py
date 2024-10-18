@@ -60,7 +60,7 @@ def detail(id):
 @app.route("/edit/author/<int:id>")
 def edit_author(id):
     books = get_book_by_author(id)
-        
+
     a:Author = get_author(id)
     f = AuthorForm(id=a.id, name=a.name)
     return render_template(
@@ -137,7 +137,7 @@ def search():
     if search_val is not None:
         books = search_books_by_author_or_title(search_val)
     
-    return render_template('search.html', title='Résultats de recherche', books=books)
+    return render_template('search.html', title='Search results', books=books)
 
 
 
