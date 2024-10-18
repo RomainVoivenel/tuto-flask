@@ -54,3 +54,7 @@ div.mycard{
     position: absolute;
     z-index: 1000;
 }
+
+img{
+    margin: 1%;
+}
