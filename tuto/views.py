@@ -36,11 +36,19 @@ class LoginForm(FlaskForm):
 
 @app.route("/")
 def home():
-    return render_template (
+    author_id = request.args.get('input_value')
+
+    if author_id == 'All author':
+        books = get_sample()
+    else:
+        books = get_book_by_author(author_id)
+
+    return render_template(
         "home.html",
         title="My Books",
-        books =get_sample(),
-        authors=search_books_by_author())
+        books=books,
+        authors=search_books_by_author()
+    )
 
 @app.route("/detail/<id>")
 def detail(id):

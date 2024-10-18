@@ -28,8 +28,11 @@ class User(db.Model, UserMixin):
         return self.username
     
 def get_sample():
-    return Book.query.limit(18).all()
-    
+    return Book.query.limit(30).all()
+
+def get_book_by_author(author_id):
+    return Book.query.filter_by(author_id=author_id).all()
+
 def get_book(id):
     return Book.query.get_or_404(id)
 
@@ -44,7 +47,7 @@ def search_books_by_author_or_title(search_val):
             Author.name.like(f'%{search_val}%'),  # Rechercher parmi les auteurs si le search_val y est
             Book.title.like(f'%{search_val}%'),    # Rechercher parmi les titres de livre si le search_val y est
             Book.price.like(f'%{search_val}%')
-            )).limit(18).all()
+            )).limit(30).all()
 
 def search_books_by_author():
     return Author.query.limit(100).all()
@@ -54,4 +57,4 @@ def load_user(username):
     return User.query.get_or_404(username)
 
 def get_sample_authors():
-    return Author.query.limit(18).all()
+    return Author.query.limit(30).all()

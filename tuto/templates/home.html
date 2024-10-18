@@ -5,16 +5,25 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}">
 <h1>{{title}}</h1>
-<select class="custom-select" onfocus='this.size=7;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
-    <option>Choose an author</option>
-    {% for author in authors %}
-        <option><a href="{{url_for('home', id=author.id)}}">{{ author.name }}</a></option>
-    {% endfor %}
-</select>
+<form action="{{ url_for('home') }}" method="GET">
+    <select name="input_value" class="custom-select" onfocus='this.size=7;' onblur='this.size=1;' onchange='this.form.submit(); this.size=1; this.blur();'>
+        <option>All author</option>
+        {% for author in authors %}
+            <option value="{{ author.id }}" 
+                {% if request.args.get('input_value') == author.id|string %}selected{% endif %}>
+                {{ author.name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+
+
+
 <div class="sample">
     {% for x in books %}
     <a href="{{url_for('detail', id=x.id)}}">
-    <img src="{{ url_for('static', filename='images/'+x.img) }}" alt="{{x.title}}" title="{{x.title}}">
+        <img src="{{ url_for('static', filename='images/'+x.img) }}" alt="{{x.title}}" title="{{x.title}}">
     </a>
     {% endfor %}
     {% if current_user.is_authenticated%}
