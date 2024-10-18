@@ -1,0 +1,11 @@
+Flask==2.0.3
+Flask-Bootstrap==1.0.9
+Flask-WTF==1.0.0
+Flask-Login==0.6.2
+Flask-SQLAlchemy==2.5.1
+SQLAlchemy==1.4.31
+WTForms==3.0.0
+PyYAML==6.0
+
+
+#pip install -r requirements.txt
