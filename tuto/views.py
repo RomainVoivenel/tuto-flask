@@ -59,11 +59,13 @@ def detail(id):
     
 @app.route("/edit/author/<int:id>")
 def edit_author(id):
+    books = get_book_by_author(id)
+        
     a:Author = get_author(id)
     f = AuthorForm(id=a.id, name=a.name)
     return render_template(
         "edit-author.html",
-        author=a, form=f)
+        author=a, form=f, books=books)
     
 @app.route("/save/author/", methods=("POST",))
 def save_author():
