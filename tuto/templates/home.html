@@ -19,5 +19,6 @@
     {% endfor %}
     {% if current_user.is_authenticated%}
     <a href="{{ url_for ('add_book') }}" class="btn btn-success rounded-pill">Add book</a>
+    {% endif %}
 </div>
 {% endblock %}
